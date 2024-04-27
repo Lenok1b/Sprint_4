@@ -1,5 +1,7 @@
 package ru.yandex.praktikum;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -11,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(Parameterized.class)
 
 public class MainAccordion {
-    private static final String BROWSE = "firefox";
+    private static final String BROWSE = "Firefox";
     private WebDriver webDriver;
     private int index;
     private String answer;
@@ -36,11 +38,18 @@ public class MainAccordion {
         };
     }
 
-    @Test
-    public void mainQuestionTest() {
+    @Before
+    public void newStart(){
         //Запускам браузер
         BaseTest baseTest = new BaseTest();
         webDriver = baseTest.setup(BROWSE);
+    }
+
+    @Test
+    public void mainQuestionTest() {
+        //Запускам браузер
+ //       BaseTest baseTest = new BaseTest();
+ //       webDriver = baseTest.setup(BROWSE);
 
         //Создаем объект класса
         MainPage mainPage = new MainPage(webDriver);
@@ -56,9 +65,11 @@ public class MainAccordion {
 
         //Проверяем вопрос-ответ
         assertTrue(answerIsDisplayed);
-
-        //Закрываем браузер
-        // По заданию: Метод driver.quit(); нужно использовать в конце каждого теста.
+    }
+    //Закрываем браузер
+    // По заданию: Метод driver.quit(); нужно использовать в конце каждого теста.
+    @After
+    public void newQuite() {
         webDriver.quit();
     }
 }

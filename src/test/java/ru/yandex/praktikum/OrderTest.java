@@ -1,6 +1,8 @@
 package ru.yandex.praktikum;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -64,14 +66,15 @@ public class OrderTest extends BaseTest{
         // По заданию: Метод driver.quit(); нужно использовать в конце каждого теста.
         webDriver.quit();
     }
+@Before
+public void newStart(){
+    //Запускам браузер
+    BaseTest baseTest = new BaseTest();
+    webDriver = baseTest.setup(BROWSE);
+}
 
     @Test
     public void createOrderTwo() {
-
-        //Запускам браузер
-        BaseTest baseTest = new BaseTest();
-        webDriver = baseTest.setup(BROWSE);
-
         //Создаем объект класса главного окна и вызываем метод нажатия кнопки Заказать
         MainPage mainPage = new MainPage(webDriver);
         //mainPage.clickCreateOrder(index, button);
@@ -97,6 +100,13 @@ public class OrderTest extends BaseTest{
 
         //Закрываем браузер
         // По заданию: Метод driver.quit(); нужно использовать в конце каждого теста.
+       // webDriver.quit();
+    }
+
+    //Закрываем браузер
+    // По заданию: Метод driver.quit(); нужно использовать в конце каждого теста.
+    @After
+    public void newQuite() {
         webDriver.quit();
     }
 }
